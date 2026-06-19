@@ -182,7 +182,7 @@ export default function PLImmobilien() {
 
         <div className="container relative z-10 text-center px-6">
           <div className="mx-auto max-w-5xl">
-            <div className="inline-flex items-center gap-2 rounded-full glass px-4 py-1 text-xs tracking-[3px] font-medium text-muted mb-8">
+            <div className="inline-flex items-center gap-2 rounded-full glass px-4 py-1 text-xs tracking-[3px] font-medium text-foreground/80 mb-8 border border-white/10">
               DIETIKON · ZÜRICHSEE · AARGAU
             </div>
 
