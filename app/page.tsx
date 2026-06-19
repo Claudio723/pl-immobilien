@@ -221,7 +221,7 @@ export default function PLImmobilien() {
       </section>
 
       {/* ==================== QUICK TRUST / STATS ==================== */}
-      <section className="border-y bg-surface/60 py-5">
+      <section className="border-y border-separator/60 bg-surface/70 py-5">
         <div className="container flex flex-wrap justify-center gap-x-14 gap-y-4 text-center text-sm">
           <div><span className="font-semibold tabular-nums">15</span> Jahre Leidenschaft</div>
           <div><span className="font-semibold tabular-nums">320</span>+ erfolgreiche Transaktionen</div>
@@ -260,7 +260,7 @@ export default function PLImmobilien() {
 
           {/* Filter - custom segmented control (pure glass + OSS Buttons) */}
           <div className="mb-9 flex justify-center">
-            <div className="inline-flex rounded-full border border-white/10 bg-white/5 p-1">
+            <div className="inline-flex rounded-full border border-white/10 bg-surface-secondary p-1">
               {[
                 { key: "alle", label: "Alle" },
                 { key: "kaufen", label: "Kaufen" },
@@ -272,8 +272,8 @@ export default function PLImmobilien() {
                   onClick={() => setFilter(opt.key)}
                   className={`px-6 py-1.5 text-sm font-medium rounded-full transition-all ${
                     filter === opt.key 
-                      ? "bg-white/90 text-foreground shadow-sm" 
-                      : "text-foreground/70 hover:text-foreground hover:bg-white/10"
+                      ? "bg-surface text-foreground shadow-sm border border-white/20" 
+                      : "text-foreground/70 hover:text-foreground hover:bg-white/5"
                   }`}
                 >
                   {opt.label}

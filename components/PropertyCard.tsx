@@ -21,7 +21,7 @@ export function PropertyCard({ property }: { property: Property }) {
   return (
     <Card className="property-card glass overflow-hidden group border-0 p-0 flex flex-col h-full">
       {/* Image area with glass overlay label */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-zinc-200">
+      <div className="relative aspect-[16/10] overflow-hidden bg-surface-secondary">
         <img
           src={property.image}
           alt={property.title}
@@ -32,13 +32,13 @@ export function PropertyCard({ property }: { property: Property }) {
         {property.status && (
           <Chip
             size="sm"
-            className="absolute top-4 left-4 backdrop-blur-md bg-white/90 text-foreground border border-white/40 font-medium"
+            className="absolute top-4 left-4 backdrop-blur-md bg-surface text-foreground border border-white/20 font-medium"
           >
             {property.status}
           </Chip>
         )}
         <div className="absolute bottom-4 right-4">
-          <div className="glass-strong px-3.5 py-1 rounded-full text-xs tracking-widest font-medium text-foreground/90">
+          <div className="glass-strong px-3.5 py-1 rounded-full text-xs tracking-widest font-medium text-foreground/90 border border-white/10">
             {property.type}
           </div>
         </div>
