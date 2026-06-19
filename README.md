@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PL Immobilien — Premium Real Estate Website
 
-## Getting Started
+Eine komplett moderne, frische und elegante Website für PL Immobilien (Dietikon/Zürich).
 
-First, run the development server:
+**Stack & Highlights**
+- Next.js 16 + App Router + TypeScript
+- Tailwind CSS v4
+- **@heroui/react** (OSS) + **@heroui-pro/react** (Pro) via HeroUI MCP
+- Vollständiges **Glassmorphism-Design** (OSS Glass Theme)
+- 100% nach **heroui-pro-design-taste** Prinzipien umgesetzt
+- Pro-Komponenten: `Segment`, `KPI`, `Sheet`
+- Reichhaltige, persönliche deutsche Inhalte für eine Premium-Immobilienfirma
+
+## Starten
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Öffne http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## GitHub + Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- GitHub: https://github.com/Claudio723/pl-immobilien
+- Einfach mit Vercel verknüpfen (GitHub-Import) oder `vercel` CLI verwenden für Deploy.
 
-## Learn More
+## Design
 
-To learn more about Next.js, take a look at the following resources:
+- Grosszügige Abstände, klare Hierarchie, optische Ausrichtung
+- Glass Surfaces mit subtilem Blur und Tiefenwirkung
+- HeroUI semantic variants + compound components
+- Frische, moderne und vertrauensbildende Ästhetik
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Erstellt mit HeroUI MCP, GitHub MCP und Vercel MCP.
