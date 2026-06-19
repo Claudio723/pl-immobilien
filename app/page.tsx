@@ -272,8 +272,8 @@ export default function PLImmobilien() {
                   onClick={() => setFilter(opt.key)}
                   className={`px-6 py-1.5 text-sm font-medium rounded-full transition-all ${
                     filter === opt.key 
-                      ? "bg-surface text-foreground shadow-sm border border-white/20" 
-                      : "text-foreground/70 hover:text-foreground hover:bg-white/5"
+                      ? "bg-accent text-accent-foreground shadow-sm" 
+                      : "text-foreground/70 hover:text-foreground hover:bg-surface/60"
                   }`}
                 >
                   {opt.label}
