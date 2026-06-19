@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Button, Input, TextArea } from "@heroui/react";
-import { KPI, Segment } from "@heroui-pro/react";
 import {
   Home,
   KeyRound,
@@ -160,14 +159,10 @@ export default function PLImmobilien() {
 
   const filteredProperties = React.useMemo(() => {
     if (filter === "alle") return properties;
-    if (filter === "kaufen") return properties.filter(p => !p.type.includes("Gewerbe") && p.price.includes("CHF"));
-    if (filter === "mieten") return properties.filter(p => p.id % 2 === 0); // demo
+    if (filter === "kaufen") return properties.filter(p => p.type !== "Gewerbe");
+    if (filter === "mieten") return properties.slice(0, 3); // demo filter
     return properties.filter(p => p.type === "Gewerbe");
   }, [filter]);
-
-  const handleFilterChange = (key: string | number) => {
-    setFilter(String(key));
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -263,14 +258,28 @@ export default function PLImmobilien() {
             <p className="text-muted max-w-xs">Entdecken Sie exklusive Immobilien in bester Lage. Alle Objekte werden von uns persönlich betreut.</p>
           </div>
 
-          {/* Pro Segment Filter - modern & clean */}
+          {/* Filter - custom segmented control (pure glass + OSS Buttons) */}
           <div className="mb-9 flex justify-center">
-            <Segment defaultSelectedKey="alle" onSelectionChange={handleFilterChange} variant="ghost">
-              <Segment.Item id="alle">Alle</Segment.Item>
-              <Segment.Item id="kaufen">Kaufen</Segment.Item>
-              <Segment.Item id="mieten">Mieten</Segment.Item>
-              <Segment.Item id="gewerbe">Gewerbe</Segment.Item>
-            </Segment>
+            <div className="inline-flex rounded-full border border-white/10 bg-white/5 p-1">
+              {[
+                { key: "alle", label: "Alle" },
+                { key: "kaufen", label: "Kaufen" },
+                { key: "mieten", label: "Mieten" },
+                { key: "gewerbe", label: "Gewerbe" },
+              ].map((opt) => (
+                <button
+                  key={opt.key}
+                  onClick={() => setFilter(opt.key)}
+                  className={`px-6 py-1.5 text-sm font-medium rounded-full transition-all ${
+                    filter === opt.key 
+                      ? "bg-white/90 text-foreground shadow-sm" 
+                      : "text-foreground/70 hover:text-foreground hover:bg-white/10"
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -287,7 +296,7 @@ export default function PLImmobilien() {
         </div>
       </section>
 
-      {/* ==================== KPI STATS (PRO) - FRESH MODERN ==================== */}
+      {/* ==================== STATS (pure glass + OSS, matching design taste) ==================== */}
       <section className="section container">
         <div className="mb-10 text-center">
           <div className="text-xs uppercase tracking-[3px] text-accent mb-1">ZAHLEN, DIE ZÄHLEN</div>
@@ -296,15 +305,13 @@ export default function PLImmobilien() {
 
         <div className="grid gap-5 sm:grid-cols-3 max-w-5xl mx-auto">
           {statsData.map((stat, i) => (
-            <KPI key={i} className="kpi">
-              <KPI.Content className="py-1">
-                <div>
-                  <KPI.Value value={stat.value} className="text-7xl font-semibold tabular-nums tracking-[-3.5px]" />
-                  {stat.suffix && <span className="text-5xl font-semibold tabular-nums tracking-tighter text-muted">{stat.suffix}</span>}
-                </div>
-                <div className="text-muted text-xl mt-1 tracking-tight">{stat.label}</div>
-              </KPI.Content>
-            </KPI>
+            <div key={i} className="glass rounded-3xl p-8 text-center border-0">
+              <div className="text-7xl font-semibold tabular-nums tracking-[-3.5px] leading-none">
+                {stat.value}
+                {stat.suffix && <span className="text-5xl tracking-tighter text-muted/80">{stat.suffix}</span>}
+              </div>
+              <div className="text-muted mt-3 text-xl tracking-tight">{stat.label}</div>
+            </div>
           ))}
         </div>
       </section>

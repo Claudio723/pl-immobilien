@@ -3,8 +3,7 @@
 import React from "react";
 import { Button } from "@heroui/react";
 import { Menu, X, Building2 } from "lucide-react";
-import { Sheet } from "@heroui-pro/react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { href: "#dienstleistungen", label: "Dienstleistungen" },
@@ -77,70 +76,91 @@ export function Navbar() {
         </div>
 
         {/* Mobile Menu Trigger */}
-        <Sheet isOpen={mobileOpen} onOpenChange={setMobileOpen}>
-          <Sheet.Trigger>
-            <Button
-              variant="ghost"
-              size="sm"
-              isIconOnly
-              className="md:hidden"
-              aria-label="Menü öffnen"
-            >
-              <Menu className="h-5 w-5" />
-            </Button>
-          </Sheet.Trigger>
-          <Sheet.Backdrop>
-            <Sheet.Content className="w-full max-w-[320px]">
-              <Sheet.Dialog className="h-full p-0">
-                <div className="flex items-center justify-between border-b px-6 py-5">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-accent text-accent-foreground">
-                      <Building2 className="h-4 w-4" />
-                    </div>
-                    <div className="font-semibold">PL Immobilien</div>
-                  </div>
-                  <Sheet.CloseTrigger>
-                    <Button variant="ghost" size="sm" isIconOnly>
-                      <X className="h-5 w-5" />
-                    </Button>
-                  </Sheet.CloseTrigger>
-                </div>
-
-                <div className="flex flex-col gap-1 px-3 py-6 text-lg">
-                  {navLinks.map((link) => (
-                    <button
-                      key={link.href}
-                      onClick={() => scrollTo(link.href)}
-                      className="text-left px-4 py-3.5 rounded-xl hover:bg-surface-secondary active:bg-surface-tertiary transition-colors"
-                    >
-                      {link.label}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="mt-auto border-t p-6 flex flex-col gap-3">
-                  <Button
-                    variant="ghost"
-                    size="lg"
-                    fullWidth
-                    onPress={() => scrollTo("#kontakt")}
-                  >
-                    Immobilie verkaufen
-                  </Button>
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    fullWidth
-                    onPress={() => scrollTo("#objekte")}
-                  >
-                    Objekte entdecken
-                  </Button>
-                </div>
-              </Sheet.Dialog>
-            </Sheet.Content>
-          </Sheet.Backdrop>
-        </Sheet>
+        <Button
+          variant="ghost"
+          size="sm"
+          isIconOnly
+          className="md:hidden"
+          aria-label="Menü öffnen"
+          onPress={() => setMobileOpen(true)}
+        >
+          <Menu className="h-5 w-5" />
+        </Button>
       </div>
+
+      {/* Mobile Drawer - glassmorphic, animated (no Pro dependency) */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              className="fixed inset-0 z-[60] bg-black/40 md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileOpen(false)}
+            />
+
+            {/* Drawer */}
+            <motion.div
+              className="fixed inset-y-0 right-0 z-[70] w-[82%] max-w-[300px] glass md:hidden flex flex-col"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 28, stiffness: 280 }}
+            >
+              <div className="flex items-center justify-between border-b px-6 py-5">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+                    <Building2 className="h-4 w-4" />
+                  </div>
+                  <div className="font-semibold">PL Immobilien</div>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  isIconOnly
+                  onPress={() => setMobileOpen(false)}
+                  aria-label="Menü schließen"
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </div>
+
+              <div className="flex flex-col gap-1 px-3 py-6 text-lg">
+                {navLinks.map((link) => (
+                  <button
+                    key={link.href}
+                    onClick={() => scrollTo(link.href)}
+                    className="text-left px-4 py-3.5 rounded-xl hover:bg-surface-secondary active:bg-surface-tertiary transition-colors"
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-auto border-t p-6 flex flex-col gap-3">
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  fullWidth
+                  onPress={() => scrollTo("#kontakt")}
+                >
+                  Immobilie verkaufen
+                </Button>
+                <Button
+                  variant="primary"
+                  size="lg"
+                  fullWidth
+                  onPress={() => scrollTo("#objekte")}
+                >
+                  Objekte entdecken
+                </Button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
